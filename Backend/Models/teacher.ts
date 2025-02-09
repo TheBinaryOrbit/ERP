@@ -1,7 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { addressSchema } from "./commonSchema/address";
 
-const teacherSchema = new mongoose.Schema({
+
+
+const teacherSchema : Schema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -16,18 +18,18 @@ const teacherSchema = new mongoose.Schema({
         required: true
     },
     aadharNumber: {
-        type: Date,
+        type: String,
         required: true
     },
     classTeacherOf: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'class',
     },
-    phoneNUmber1 : {
+    phoneNumber1 : {
         type : String,
         required: true
     },
-    phoneNUmber2 : {
+    phoneNumber2 : {
         type : String,
         required: true
     },
@@ -37,10 +39,6 @@ const teacherSchema = new mongoose.Schema({
     },
     permanentAddressInfo : addressSchema,
     temporaryAddressInfo : addressSchema,
-    profilePhoto: {
-        type: String,
-        required: true
-    },
     academicQualifications: {
         degree: {
             type: String,

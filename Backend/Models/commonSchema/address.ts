@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-export const addressSchema = new mongoose.Schema({
+import mongoose, { Schema } from "mongoose";
+
+export const addressSchema : Schema = new mongoose.Schema({
     state : {
         type : String,
         required : true,

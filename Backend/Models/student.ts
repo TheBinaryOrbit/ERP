@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { addressSchema } from "./commonSchema/address";
 
-const parentSchema = new mongoose.Schema({
+const parentSchema : Schema = new mongoose.Schema({
     fatherName : {
         type : String,
         required: true
@@ -32,17 +32,16 @@ const parentSchema = new mongoose.Schema({
     },
     guardianName : {
         type : String,
-        required: true
     }
 })
 
 
-const studentSchema = new mongoose.Schema({
+const studentSchema : Schema = new mongoose.Schema({
     name : {
         type : String,
         required : true
     },
-    class : {
+    className : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'class',
         required: true
@@ -53,11 +52,8 @@ const studentSchema = new mongoose.Schema({
     },
     admissionNumber :{
         type : Number, 
-        required : true
-    },
-    profilePhoto : {
-        type : String,
-        required :true
+        required : true,
+        unique : true,
     },
     gender : {
         type : String,
@@ -69,7 +65,7 @@ const studentSchema = new mongoose.Schema({
         required: true
     },
     aadharNumber : {
-        type : Date,
+        type : String,
         required: true
     },
     parentInfo : parentSchema,

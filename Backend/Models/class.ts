@@ -1,15 +1,20 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const classSchema = new mongoose.Schema({
-    class : {
+const classSchema : Schema = new mongoose.Schema({
+    className : {
         type : Number,
         required: true
     },
     section : {
         type : String,
         require : true,
-    }
-},{timestamps : true})
+    },
+    subjects : [
+        {
+            type : String
+        }
+    ]
+},{timestamps : true});
 
 
 export const className = mongoose.model('class' ,classSchema);

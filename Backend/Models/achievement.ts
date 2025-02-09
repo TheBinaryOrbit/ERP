@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const achievementSchema = new mongoose.Schema({
+const achievementSchema : Schema = new mongoose.Schema({
     title : {
         type : String,
         require : true
@@ -14,11 +14,15 @@ const achievementSchema = new mongoose.Schema({
         ref : 'student',
         required: true
     },
-
+    createdBy : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'teacher',
+        required: true
+    },
     // temporary hai may be photo ka option na de
     certificate : {
         type : String,
-        required: true
+        // required: true
     }
 },{timestamps : true})
 

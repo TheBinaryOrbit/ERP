@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const assignmentSchema = new mongoose.Schema({
+const assignmentSchema : Schema = new mongoose.Schema({
     title: {
         type: String,
         require: true
@@ -9,7 +9,7 @@ const assignmentSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    class : {
+    className : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'class',
         required: true
