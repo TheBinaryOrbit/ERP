@@ -5,6 +5,14 @@ const classSchema : Schema = new mongoose.Schema({
         type : Number,
         required: true
     },
+    classTeacherId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'teacher',
+    },
+    fee : {
+        type : Number,
+        required : true
+    },
     section : {
         type : String,
         require : true,

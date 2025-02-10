@@ -16,6 +16,10 @@ const lessonPlanSchema = new mongoose_1.default.Schema({
         ref: 'class',
         required: true
     },
+    subject: {
+        type: String,
+        required: true
+    },
     day: {
         type: String,
         enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -25,6 +29,6 @@ const lessonPlanSchema = new mongoose_1.default.Schema({
         type: Number,
         required: true
     }
-});
+}, { timestamps: true });
 exports.lessonPlan = mongoose_1.default.model('lessonplan', lessonPlanSchema);
 //# sourceMappingURL=lessonplan.js.map

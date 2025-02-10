@@ -8,4 +8,6 @@ const express_1 = __importDefault(require("express"));
 const leaveapplication_1 = require("../Controllers/leaveapplication");
 exports.LeaveApplicationRouter = express_1.default.Router();
 exports.LeaveApplicationRouter.post('/addleave', leaveapplication_1.addLeave);
+exports.LeaveApplicationRouter.patch('/updateleave/:id', leaveapplication_1.updateLeaveApplication);
+exports.LeaveApplicationRouter.delete('/deleteleaveapplication/:id', leaveapplication_1.deleteLeaveApplication);
 //# sourceMappingURL=leaveapplication.js.map

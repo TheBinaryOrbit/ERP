@@ -19,3 +19,35 @@ export const addNotice = async (req : Request , res : Response) : Promise<any> =
         return res.status(500).json({ "error": "Internal Server Error: Unable to Create Notice" });
     }
 }
+
+
+export const updateNotice = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const id = req.params.id;
+        if (id.length != 24) return res.status(400).json({ "error": "Invalid Notice  ID" });
+
+        const result = await notice.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (!result) return res.status(404).json({ "error": "Notice Not Found" });
+        return res.status(200).json({ "message": "Notice Updated Successfully" , result });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Notice" });
+    }
+}
+
+
+export const deleteNotice =async (req : Request , res : Response) : Promise<any> => {
+    try {
+        const id = req.params.id;
+        if(id.length != 24) return res.status(400).json({"error" : "Invalid Notice ID"});
+
+        const result = await notice.findByIdAndUpdate(id , {isDisable : true});
+
+        if(!result) return res.status(404).json({"error" : "Notice Not Found"});
+        return res.status(200).json({"message" :  "Notice Deleted Successfully"});
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error:"Internal Server Error: Unable to Delete Notice"});
+    }
+}

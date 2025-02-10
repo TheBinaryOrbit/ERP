@@ -19,3 +19,34 @@ export const handleAddAssignment = async (req : Request , res : Response) : Prom
         return res.status(500).json({ "error": "Internal Server Error: Unable to add Assignment" });
     }
 }
+
+export const handleUpdateAssignment = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const id = req.params.id;
+        if (id.length != 24) return res.status(400).json({ "error": "Invalid Assignment  ID" });
+
+        const result = await assignment.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (!result) return res.status(404).json({ "error": "Assignment Not Found" });
+        return res.status(200).json({ "message": "Assignment Updated Successfully" , result });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Assignment" });
+    }
+}
+
+
+export const handleDeleteAssignment =async (req : Request , res : Response) : Promise<any> => {
+    try {
+        const id = req.params.id;
+        if(id.length != 24) return res.status(400).json({"error" : "Invalid Assignment ID"});
+
+        const result = await assignment.findByIdAndDelete(id);
+
+        if(!result) return res.status(404).json({"error" : "Assignment Not Found"});
+        return res.status(200).json({"message" :  "Assignment Deleted Successfully"});
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Assignment" });
+    }
+}

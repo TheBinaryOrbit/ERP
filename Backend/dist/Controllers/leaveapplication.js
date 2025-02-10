@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addLeave = void 0;
+exports.deleteLeaveApplication = exports.updateLeaveApplication = exports.addLeave = void 0;
 const leaveapplication_1 = require("../Models/leaveapplication");
 const addLeave = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -34,4 +34,36 @@ const addLeave = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.addLeave = addLeave;
+const updateLeaveApplication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        if (id.length != 24)
+            return res.status(400).json({ "error": "Invalid Applicaton  ID" });
+        const result = yield leaveapplication_1.leaveApplication.findByIdAndUpdate(id, req.body, { new: true });
+        if (!result)
+            return res.status(404).json({ "error": "Applicaton Not Found" });
+        return res.status(200).json({ "message": "Applicaton Updated Successfully", result });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Applicaton" });
+    }
+});
+exports.updateLeaveApplication = updateLeaveApplication;
+const deleteLeaveApplication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        if (id.length != 24)
+            return res.status(400).json({ "error": "Invalid Applicaton ID" });
+        const result = yield leaveapplication_1.leaveApplication.findByIdAndUpdate(id, { isDisable: true });
+        if (!result)
+            return res.status(404).json({ "error": "Applicaton Not Found" });
+        return res.status(200).json({ "message": "Applicaton Deleted Successfully" });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Application" });
+    }
+});
+exports.deleteLeaveApplication = deleteLeaveApplication;
 //# sourceMappingURL=leaveapplication.js.map

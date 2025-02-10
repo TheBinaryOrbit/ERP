@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { addressSchema } from "./commonSchema/address";
-
+import {randomBytes , createHmac } from 'crypto'
 
 
 const teacherSchema : Schema = new mongoose.Schema({
@@ -37,6 +37,14 @@ const teacherSchema : Schema = new mongoose.Schema({
         type : String,
         required: true
     },
+    salt : {
+        type : String,
+        required : true
+    },
+    password : {
+        type : String,
+        required : true
+    },
     permanentAddressInfo : addressSchema,
     temporaryAddressInfo : addressSchema,
     academicQualifications: {
@@ -62,7 +70,24 @@ const teacherSchema : Schema = new mongoose.Schema({
             type: String
         }
     ],
+    isVisible : {
+        type : Boolean,
+        default : true
+    }
 }, { timestamps: true });
 
 
 export const teacher = mongoose.model('teacher' , teacherSchema);
+
+
+teacherSchema.pre('save' , function(next){
+        const teacher = this as any;
+
+        const salt : string = randomBytes(8).toString('hex');
+        const generatedPassword = createHmac('sha256', salt)
+                                    .update(teacher.password)
+                                    .digest('hex');
+
+        this.salt =  salt;
+        this.password = generatedPassword;
+});

@@ -8,4 +8,6 @@ const express_1 = __importDefault(require("express"));
 const student_js_1 = require("../Controllers/student.js");
 exports.StudentRouter = express_1.default.Router();
 exports.StudentRouter.post('/addstudent', student_js_1.handleAddStudent);
+exports.StudentRouter.patch('/updatestudent.:id', student_js_1.handleUpdateStudent);
+exports.StudentRouter.delete('/deletestudent/:id', student_js_1.deleteStudent);
 //# sourceMappingURL=student.js.map

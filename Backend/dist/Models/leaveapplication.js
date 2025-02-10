@@ -51,6 +51,10 @@ const leaveApplicationSchema = new mongoose_1.default.Schema({
     attachments: {
         type: String,
     },
+    isDisable: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 exports.leaveApplication = mongoose_1.default.model('leaveapplication', leaveApplicationSchema);
 //# sourceMappingURL=leaveapplication.js.map

@@ -8,4 +8,6 @@ const express_1 = __importDefault(require("express"));
 const achievement_1 = require("../Controllers/achievement");
 exports.AchievementRouter = express_1.default.Router();
 exports.AchievementRouter.post('/addachievement', achievement_1.handleAddAchivements);
+exports.AchievementRouter.patch('/updateachievement/:id', achievement_1.handleUpdateAchivements);
+exports.AchievementRouter.delete('/deleteachievement/:id', achievement_1.handleDeleteAchivement);
 //# sourceMappingURL=achievement.js.map

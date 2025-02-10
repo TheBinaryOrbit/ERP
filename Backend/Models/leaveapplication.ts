@@ -46,6 +46,10 @@ const leaveApplicationSchema: Schema = new mongoose.Schema({
   attachments: {
     type: String,
   },
+  isDisable : {
+    type : Boolean,
+    default : false
+  }
 }, { timestamps: true });
 
 export const leaveApplication = mongoose.model('leaveapplication', leaveApplicationSchema);

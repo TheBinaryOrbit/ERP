@@ -12,6 +12,10 @@ const lessonPlanSchema : Schema = new mongoose.Schema({
         ref : 'class',
         required : true
     },
+    subject : {
+        type : String,
+        required :true
+    },
     day : {
         type : String,
         enum : ['Monday','Tuesday' , 'Wednesday','Thursday' , 'Friday' , 'Saturday' , 'Sunday'],
@@ -21,6 +25,6 @@ const lessonPlanSchema : Schema = new mongoose.Schema({
         type : Number,
         required : true
     }
-});
+}, {timestamps : true});
 
 export const lessonPlan =  mongoose.model('lessonplan' , lessonPlanSchema)

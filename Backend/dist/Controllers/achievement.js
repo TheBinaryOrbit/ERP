@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleAddAchivements = void 0;
+exports.handleDeleteAchivement = exports.handleUpdateAchivements = exports.handleAddAchivements = void 0;
 const achievement_1 = require("../Models/achievement");
 const handleAddAchivements = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -31,4 +31,36 @@ const handleAddAchivements = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.handleAddAchivements = handleAddAchivements;
+const handleUpdateAchivements = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        if (id.length != 24)
+            return res.status(400).json({ "error": "Invalid Achivement ID" });
+        const result = yield achievement_1.achievement.findByIdAndUpdate(id, req.body, { new: true });
+        if (!result)
+            return res.status(404).json({ "error": "Achivement Not Found" });
+        return res.status(200).json({ "message": "Achievement Updated Successfully", result });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Achievement" });
+    }
+});
+exports.handleUpdateAchivements = handleUpdateAchivements;
+const handleDeleteAchivement = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        if (id.length != 24)
+            return res.status(400).json({ "error": "Invalid Achivement  ID" });
+        const result = yield achievement_1.achievement.findByIdAndDelete(id);
+        if (!result)
+            return res.status(404).json({ "error": "Achivement Not Found" });
+        return res.status(200).json({ "message": "Achievement Deleted Successfully" });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Achievement" });
+    }
+});
+exports.handleDeleteAchivement = handleDeleteAchivement;
 //# sourceMappingURL=achievement.js.map

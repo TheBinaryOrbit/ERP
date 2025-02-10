@@ -24,6 +24,6 @@ const feedbackSchema = new mongoose_1.default.Schema({
     remark: {
         type: String,
     }
-});
+}, { timestamps: true });
 exports.feedback = mongoose_1.default.model('feedback', feedbackSchema);
 //# sourceMappingURL=feedback.js.map

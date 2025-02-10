@@ -20,6 +20,6 @@ const feedbackSchema : Schema = new mongoose.Schema({
     remark : {
         type : String,
     }
-})
+} , {timestamps : true})
 
 export const feedback = mongoose.model('feedback' , feedbackSchema);

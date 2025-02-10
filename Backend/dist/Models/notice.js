@@ -25,6 +25,10 @@ const noticeSchema = new mongoose_1.default.Schema({
         enum: ['Active', 'Expired'],
         default: 'Active'
     },
+    isDisable: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 exports.notice = mongoose_1.default.model('Notice', noticeSchema);
 //# sourceMappingURL=notice.js.map

@@ -13,13 +13,14 @@ exports.addLessonPlan = void 0;
 const lessonplan_1 = require("../Models/lessonplan");
 const addLessonPlan = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!req.body.teacherId || !req.body.classId || !req.body.day || !req.body.periodNumber)
+        if (!req.body.teacherId || !req.body.classId || !req.body.day || !req.body.periodNumber || !req.body.subject)
             return res.status(400).json({ "error": "All Fields Are Required" });
         const result = yield lessonplan_1.lessonPlan.create({
             teacherId: req.body.teacherId,
             classId: req.body.classId,
             day: req.body.day,
             periodNumber: req.body.periodNumber,
+            subject: req.body.subject
         });
         if (!result)
             return res.status(500).json({ "error": "Unable to add Lesson Plan" });

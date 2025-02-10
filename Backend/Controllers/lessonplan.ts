@@ -3,7 +3,7 @@ import { lessonPlan } from "../Models/lessonplan";
 
 export const addLessonPlan = async (req : Request , res : Response) : Promise<any> => {
     try {
-        if(!req.body.teacherId || !req.body.classId || !req.body.day || !req.body.periodNumber ) return res.status(400).json({"error" :  "All Fields Are Required"});
+        if(!req.body.teacherId || !req.body.classId || !req.body.day || !req.body.periodNumber || !req.body.subject ) return res.status(400).json({"error" :  "All Fields Are Required"});
         
 
         const result = await lessonPlan.create({
@@ -11,6 +11,7 @@ export const addLessonPlan = async (req : Request , res : Response) : Promise<an
             classId : req.body.classId,
             day : req.body.day,
             periodNumber : req.body.periodNumber,
+            subject : req.body.subject
         });
 
         if(!result) return res.status(500).json({ "error": "Unable to add Lesson Plan" });

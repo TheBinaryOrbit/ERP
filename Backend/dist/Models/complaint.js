@@ -14,6 +14,10 @@ const complaintSchema = new mongoose_1.default.Schema({
         type: String,
         require: true
     },
+    fineAmount: {
+        type: Number,
+        default: 0
+    },
     createdBy: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: 'teacher',

@@ -16,4 +16,4 @@ const attendanceSchema : Schema = new mongoose.Schema({
         enum : ['Present' , 'Absent'],
         required: true
     }
-})
+}, {timestamps : true})

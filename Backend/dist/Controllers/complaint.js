@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleAddComplaint = void 0;
+exports.handleDeleteComplaint = exports.handleUpdateComplaint = exports.handleAddComplaint = void 0;
 const complaint_1 = require("../Models/complaint");
 const handleAddComplaint = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         if (!req.body.title || !req.body.description || !req.body.createdOn || !req.body.createdBy)
             return res.status(400).json({ "error": "All Fields Are Required" });
@@ -19,7 +20,8 @@ const handleAddComplaint = (req, res) => __awaiter(void 0, void 0, void 0, funct
             title: req.body.title,
             description: req.body.description,
             createdOn: req.body.createdOn,
-            createdBy: req.body.createdBy
+            createdBy: req.body.createdBy,
+            fine: (_a = req.body) === null || _a === void 0 ? void 0 : _a.fine
         });
         if (!result)
             return res.status(500).json({ error: "Internal Server Error: Unable to add Complaint" });
@@ -30,4 +32,36 @@ const handleAddComplaint = (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.handleAddComplaint = handleAddComplaint;
+const handleUpdateComplaint = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        if (id.length != 24)
+            return res.status(400).json({ "error": "Invalid Complaint  ID" });
+        const result = yield complaint_1.complaint.findByIdAndUpdate(id, req.body, { new: true });
+        if (!result)
+            return res.status(404).json({ "error": "Complaint Not Found" });
+        return res.status(200).json({ "message": "Complaint Updated Successfully", result });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Complaint" });
+    }
+});
+exports.handleUpdateComplaint = handleUpdateComplaint;
+const handleDeleteComplaint = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        if (id.length != 24)
+            return res.status(400).json({ "error": "Invalid Complaint ID" });
+        const result = yield complaint_1.complaint.findByIdAndDelete(id);
+        if (!result)
+            return res.status(404).json({ "error": "Complaint Not Found" });
+        return res.status(200).json({ "message": "Complaint Deleted Successfully" });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal Server Error: Unable to Delete Complaint" });
+    }
+});
+exports.handleDeleteComplaint = handleDeleteComplaint;
 //# sourceMappingURL=complaint.js.map

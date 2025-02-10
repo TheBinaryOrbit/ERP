@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.student = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const address_1 = require("./commonSchema/address");
+const crypto_1 = require("crypto");
 const parentSchema = new mongoose_1.default.Schema({
     fatherName: {
         type: String,
@@ -71,9 +72,31 @@ const studentSchema = new mongoose_1.default.Schema({
         type: String,
         required: true
     },
+    isVisible: {
+        type: Boolean,
+        default: true
+    },
+    salt: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     parentInfo: parentSchema,
     permanentAddressInfo: address_1.addressSchema,
     temporaryAddressInfo: address_1.addressSchema
 }, { timestamps: true });
 exports.student = mongoose_1.default.model('student', studentSchema);
+studentSchema.pre('save', function (next) {
+    const student = this;
+    const salt = (0, crypto_1.randomBytes)(8).toString('hex');
+    const generatedPassword = (0, crypto_1.createHmac)('sha256', salt)
+        .update(student.password)
+        .digest('hex');
+    this.salt = salt;
+    this.password = generatedPassword;
+    next();
+});
 //# sourceMappingURL=student.js.map

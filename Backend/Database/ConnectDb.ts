@@ -1,4 +1,6 @@
 import mongoose from "mongoose"
+
+
 export const ConnectDB = (Url : string)=>{
     mongoose.connect(Url)
     .then(()=>{

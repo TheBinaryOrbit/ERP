@@ -10,6 +10,14 @@ const classSchema = new mongoose_1.default.Schema({
         type: Number,
         required: true
     },
+    classTeacherId: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: 'teacher',
+    },
+    fee: {
+        type: Number,
+        required: true
+    },
     section: {
         type: String,
         require: true,

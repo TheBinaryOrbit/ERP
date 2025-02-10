@@ -8,4 +8,6 @@ const express_1 = __importDefault(require("express"));
 const complaint_1 = require("../Controllers/complaint");
 exports.ComplaintRouter = express_1.default.Router();
 exports.ComplaintRouter.post('/addcomplaint', complaint_1.handleAddComplaint);
+exports.ComplaintRouter.patch('/updatecomplaint/:id', complaint_1.handleUpdateComplaint);
+exports.ComplaintRouter.delete('/deletecomplaint/:id', complaint_1.handleDeleteComplaint);
 //# sourceMappingURL=complaint.js.map

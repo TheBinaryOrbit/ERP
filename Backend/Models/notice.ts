@@ -20,6 +20,10 @@ const noticeSchema = new mongoose.Schema({
     enum: ['Active', 'Expired'],
     default: 'Active'
   },
+  isDisable : {
+    type : Boolean,
+    default : false
+  }
 },{timestamps : true});
 
 export const notice= mongoose.model('Notice', noticeSchema);

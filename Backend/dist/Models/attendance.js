@@ -19,5 +19,5 @@ const attendanceSchema = new mongoose_1.default.Schema({
         enum: ['Present', 'Absent'],
         required: true
     }
-});
+}, { timestamps: true });
 //# sourceMappingURL=attendance.js.map
